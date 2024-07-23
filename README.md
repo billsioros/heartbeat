@@ -1,4 +1,4 @@
-<h1 align="center">Heartbeat</h1>
+<h1 align="center">HeartBeat <span style='font-size:40px;'>&#128147;</span></h1>
 
 <p align="center"><em>A heart failure detection system</em></p>
 
