@@ -1,0 +1,20 @@
+{
+  "template": "https://github.com/billsioros/cookiecutter-pypackage",
+  "commit": "a4bd5c60f064fed577292b0dc14a36dcff745d1f",
+  "checkout": null,
+  "context": {
+    "cookiecutter": {
+      "project_name": "heartbeat",
+      "package_name": "heartbeat",
+      "project_description": "A heart failure detection system",
+      "author": "Vassilis Sioros",
+      "email": "billsioros97@gmail.com",
+      "github_user": "billsioros",
+      "github_repository": "https://github.com/billsioros/heartbeat",
+      "version": "0.0.0",
+      "license": "mit",
+      "_template": "https://github.com/billsioros/cookiecutter-pypackage"
+    }
+  },
+  "directory": null
+}
