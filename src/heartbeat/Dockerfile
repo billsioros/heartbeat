@@ -20,7 +20,7 @@ ENV PYTHONFAULTHANDLER=1 \
     POETRY_HOME=/opt/poetry \
     POETRY_NO_INTERACTION=1 \
     POETRY_VIRTUALENVS_CREATE=0 \
-    POETRY_VERSION=1.2.2
+    POETRY_VERSION=1.6.1
 
 ENV POETRY_CACHE_DIR=${POETRY_HOME}/.cache \
     PATH=${POETRY_HOME}/bin:${PATH}
@@ -53,7 +53,7 @@ ENV PORT=8000
 
 COPY --from=build-base ${WORKSPACE} ${WORKSPACE}
 
-COPY src ${WORKSPACE}
+COPY ./src ${WORKSPACE}
 
 EXPOSE ${PORT}
 
@@ -71,4 +71,4 @@ CMD poetry run gunicorn \
     --timeout 30 \
     --worker-tmp-dir /dev/shm \
     --worker-class uvicorn.workers.UvicornWorker \
-    notonmywatch.app:app
+    heartbeat.app:app

@@ -24,8 +24,20 @@ classifiers = [
 "Bug Tracker" = "https://github.com/billsioros/heartbeat/issues"
 "Changelog" = "https://github.com/billsioros/heartbeat/releases"
 
+[tool.poetry.scripts]
+manage = "heartbeat.cli.manage:cli"
+
 [tool.poetry.dependencies]
 python = "^3.11"
+pydantic = "^2.8.2"
+pydantic-settings = "^2.3.4"
+fastapi = "^0.111.1"
+uvicorn = "^0.30.3"
+gunicorn = "^22.0.0"
+sqlalchemy = "^2.0.31"
+psycopg2-binary = "^2.9.9"
+typer = "^0.12.3"
+rich = "^13.7.1"
 
 [tool.poetry.group.dev.dependencies]
 python-semantic-release = "7.34.6"
@@ -174,7 +186,7 @@ recursive = true
 in-place = true
 
 [tool.mypy]
-files = [ "src/heartbeat" ]
+files = [ "src/api" ]
 warn_unused_configs = true
 warn_return_any = true
 ignore_missing_imports = true
@@ -193,7 +205,7 @@ upload_to_pypi = false
 
 [tool.vulture]
 min_confidence = 95
-paths = [ "src/heartbeat" ]
+paths = [ "src/api" ]
 
 [tool.poe.tasks]
 
@@ -216,6 +228,10 @@ cmd = "poetry run mypy"
 [tool.poe.tasks.lint]
 help = "Lint your code for errors"
 cmd = "poetry run ruff ."
+
+[tool.poe.tasks.manage]
+help = "Manage the application"
+cmd = "poetry run manage"
 
 [tool.bandit]
 recursive = true

@@ -5,7 +5,6 @@
 <!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
 
 - [ ] I have updated the documentation accordingly.
-- [ ] I have added tests to cover my changes.
 
 ---
 
