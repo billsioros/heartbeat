@@ -6,6 +6,14 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 <!--next-version-placeholder-->
 
+## v0.2.0 (2024-07-24)
+
+### Feature
+
+* Develop the rest api ([`1627268`](https://github.com/billsioros/heartbeat/commit/16272688e4ef5334220cc8f9fa33d06de459a596))
+
+**[See all commits in this version](https://github.com/billsioros/heartbeat/compare/v0.1.0...v0.2.0)**
+
 ## v0.1.0 (2024-07-23)
 
 ### Feature

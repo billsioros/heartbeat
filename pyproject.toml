@@ -6,7 +6,7 @@ requires = [
 
 [tool.poetry]
 name = "heartbeat"
-version = "0.1.0"
+version = "0.2.0"
 description = "A heart failure detection system"
 readme = "README.md"
 authors = [ "Vassilis Sioros <billsioros97@gmail.com>" ]
