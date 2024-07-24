@@ -45,10 +45,10 @@
   </a>
 </p>
 
-## :cd: Running the service
+## :cd: Running the project
 
 ```bash
-python src/heartbeat.py
+docker compose up
 ```
 
 In order to locally set up the project please follow the instructions below:
