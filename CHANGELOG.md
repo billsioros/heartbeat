@@ -6,6 +6,14 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 <!--next-version-placeholder-->
 
+## v0.3.0 (2024-07-25)
+
+### Feature
+
+* Design the frontend ([`92ba555`](https://github.com/billsioros/heartbeat/commit/92ba5558a6607065db59af9254169b40956e4622))
+
+**[See all commits in this version](https://github.com/billsioros/heartbeat/compare/v0.2.0...v0.3.0)**
+
 ## v0.2.0 (2024-07-24)
 
 ### Feature
