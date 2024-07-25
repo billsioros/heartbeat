@@ -47,6 +47,14 @@
 
 ## :cd: Running the project
 
+### NVM
+
+```shell
+nvm use --lts --global
+npm install
+npm run dev -- --host --port 3000
+```
+
 ```bash
 docker compose up
 ```
