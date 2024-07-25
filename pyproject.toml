@@ -6,6 +6,7 @@ requires = [
 
 [tool.poetry]
 name = "heartbeat"
+packages = [ { include = "api", from = "src" } ]
 version = "0.2.0"
 description = "A heart failure detection system"
 readme = "README.md"
@@ -25,7 +26,7 @@ classifiers = [
 "Changelog" = "https://github.com/billsioros/heartbeat/releases"
 
 [tool.poetry.scripts]
-manage = "heartbeat.cli.manage:cli"
+manage = "api.cli.manage:cli"
 
 [tool.poetry.dependencies]
 python = "^3.11"
