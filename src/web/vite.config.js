@@ -3,14 +3,7 @@ import { defineConfig } from 'vite';
 
 // https://vitejs.dev/config/
 export default ({ mode }) => {
-    // Default values
     let backendUrl = 'http://localhost:8000';
-
-    // Override values based on the environment
-    if (mode === 'production') {
-        // Adjust these values based on your production setup
-        backendUrl = 'backend:8000';
-    }
 
     return defineConfig({
         plugins: [react()],

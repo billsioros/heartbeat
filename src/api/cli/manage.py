@@ -1,6 +1,3 @@
-import subprocess
-import webbrowser
-
 import typer
 
 from api.cli.commands.database import group as database
@@ -12,7 +9,7 @@ cli: typer.Typer = typer.Typer()
 
 @cli.callback(name="heartbeat")
 def main(ctx: typer.Context):
-    """NotOnMyWatch CLI."""
+    """HeartBeat CLI."""
     settings = Settings()
     database = Database(str(settings.database.uri))
 
@@ -20,21 +17,6 @@ def main(ctx: typer.Context):
 
 
 cli.add_typer(database, name="database")
-
-
-@cli.command()
-def serve(port: int = 8000, build: bool = False):
-    """Serve the application on localhost."""
-    cmd = ["docker-compose", "up", "--force-recreate", "-d"]
-    if build:
-        cmd = ["docker-compose", "up", "--force-recreate", "--build", "-d"]
-
-        try:
-            subprocess.run(cmd, check=False)
-        except subprocess.CalledProcessError as e:
-            raise typer.Exit(code=e.returncode)
-
-    webbrowser.open(f"http://localhost:{port}")
 
 
 if __name__ == "__main__":
