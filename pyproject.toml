@@ -7,7 +7,7 @@ requires = [
 [tool.poetry]
 name = "heartbeat"
 packages = [ { include = "api", from = "src" } ]
-version = "0.3.0"
+version = "0.4.0"
 description = "A heart failure detection system"
 readme = "README.md"
 authors = [ "Vassilis Sioros <billsioros97@gmail.com>" ]

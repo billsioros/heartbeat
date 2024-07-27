@@ -6,6 +6,14 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 <!--next-version-placeholder-->
 
+## v0.4.0 (2024-07-27)
+
+### Feature
+
+* Deployment using docker and docker-compose ([`9e6b208`](https://github.com/billsioros/heartbeat/commit/9e6b2084f230735e852e014e7b15a17a62e12847))
+
+**[See all commits in this version](https://github.com/billsioros/heartbeat/compare/v0.3.0...v0.4.0)**
+
 ## v0.3.0 (2024-07-25)
 
 ### Feature
