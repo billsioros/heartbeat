@@ -40,7 +40,7 @@ def register_controllers(app: FastAPI, prefix: str = "") -> FastAPI:
 def register_middlewares(app: FastAPI) -> FastAPI:
     app.add_middleware(
         CORSMiddleware,
-        allow_origins=["http://localhost:3000"],
+        allow_origins=["*"],
         allow_credentials=True,
         allow_methods=["*"],
         allow_headers=["*"],
@@ -56,9 +56,9 @@ def register_events(app: FastAPI) -> FastAPI:
 def create_app() -> FastAPI:
     app = initialize_api()
     app = register_configuration(app)
-    app = register_middlewares(app)
     app = register_events(app)
     app = register_controllers(app)
+    app = register_middlewares(app)
 
     return app
 

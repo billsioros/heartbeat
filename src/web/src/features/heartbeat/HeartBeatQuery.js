@@ -63,6 +63,7 @@ export const handleResponse = async request => {
 
 const publicClient = axios.create({
     baseURL: `${__BACKEND_URL__ ?? ''}/api`,
+    headers: { 'Content-Type': 'application/json' },
 });
 
 export const useHeartBeats = () => {

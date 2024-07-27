@@ -8,7 +8,7 @@ from api.resources.database import Database
 api: Controller = create_controller(__file__, post_fix=None, tags=["Monitoring"])
 
 
-@api.get("/database", status_code=status.HTTP_204_NO_CONTENT)
+@api.get("/", status_code=status.HTTP_204_NO_CONTENT)
 async def database_health_check(
     database: Database = Depends(get_database),
 ):
