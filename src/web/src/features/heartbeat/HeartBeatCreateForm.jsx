@@ -80,8 +80,7 @@ function Select({
                 value={value}
                 onChange={onChange}
                 onBlur={() => setFieldTouched(id)}
-                label={label}
-            >
+                label={label}>
                 {choices.map(newChoice => (
                     <MenuItem key={newChoice} value={newChoice}>
                         {newChoice}
@@ -162,7 +161,7 @@ export default function HeartBeatCreateForm({ open }) {
             .label('Max Heart Rate')
             .integer()
             .min(60)
-            .max(202)
+            .max(300)
             .required(),
         exerciseAngina: ExerciseAngina.required(),
         oldPeak: yup.number().label('Old Peak').min(-10).max(10).required(),
@@ -195,14 +194,12 @@ export default function HeartBeatCreateForm({ open }) {
                 onSubmit={e => {
                     e.preventDefault();
                     handleSubmit();
-                }}
-            >
+                }}>
                 <Grid
                     sx={{ minHeight: '30vh' }}
                     container
                     columns={20}
-                    spacing={theme.spacing(1)}
-                >
+                    spacing={theme.spacing(1)}>
                     <Grid item xs={10}>
                         <TextField
                             id="age"
@@ -374,15 +371,13 @@ export default function HeartBeatCreateForm({ open }) {
                     width="100%"
                     display="flex"
                     justifyContent="flex-end"
-                    mt={theme.spacing(4)}
-                >
+                    mt={theme.spacing(4)}>
                     <Box width="25%" display="flex" justifyContent="flex-end">
                         <Button
                             color="primary"
                             variant="contained"
                             endIcon={<MonitorHeartIcon />}
-                            type="submit"
-                        >
+                            type="submit">
                             Diagnose
                         </Button>
                     </Box>
@@ -406,16 +401,14 @@ export default function HeartBeatCreateForm({ open }) {
                 margin: 'auto',
                 justifyContent: 'center',
                 padding: theme.spacing(4),
-            }}
-        >
+            }}>
             <Typography sx={{ marginBottom: theme.spacing(4) }} variant="h5">
                 Fill in the form to get your diagnosis
             </Typography>
             <Formik
                 onSubmit={handleFormSubmit}
                 initialValues={initialValues}
-                validationSchema={HeartBeatSchema}
-            >
+                validationSchema={HeartBeatSchema}>
                 {renderForm}
             </Formik>
         </Paper>

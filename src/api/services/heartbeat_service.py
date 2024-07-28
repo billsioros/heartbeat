@@ -26,7 +26,9 @@ class HeartBeatService(Service):
         except HeartBeatRepository.NotFoundException as exception:
             return ServiceResult.not_found(exception.message)
 
-    def create(self, heartbeat_create: HeartBeatCreateSchema) -> ServiceResult[HeartBeatModel]:
+    def create(
+        self, heartbeat_create: HeartBeatCreateSchema
+    ) -> ServiceResult[HeartBeatModel]:
         try:
             heartbeat = HeartBeatModel(
                 age=heartbeat_create.age,

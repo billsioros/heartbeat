@@ -21,7 +21,9 @@ class ChestPain(IntEnum):
 class RestingElectrocardiogram(IntEnum):
     NORMAL = auto()
     STT = auto()  # having ST-T wave abnormality (T wave inversions and/or ST elevation or depression of > 0.05 mV)
-    LVH = auto()  # showing probable or definite left ventricular hypertrophy by Estes' criteria
+    LVH = (
+        auto()
+    )  # showing probable or definite left ventricular hypertrophy by Estes' criteria
 
 
 class StSlope(IntEnum):
@@ -40,7 +42,8 @@ class HeartBeatModel(PkModel):
     cholesterol: Mapped[int] = Column(Integer, nullable=False)
     fasting_blood_sugar: Mapped[bool] = Column(Boolean, nullable=False)
     resting_electrocardiogram: Mapped[RestingElectrocardiogram] = Column(
-        Enum(RestingElectrocardiogram), nullable=False,
+        Enum(RestingElectrocardiogram),
+        nullable=False,
     )
     max_heart_rate: Mapped[int] = Column(Integer, nullable=False)
     exercise_angina: Mapped[bool] = Column(Boolean, nullable=False)

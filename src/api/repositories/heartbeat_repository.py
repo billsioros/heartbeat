@@ -26,7 +26,11 @@ class HeartBeatRepository(Repository):
 
     def get_by_id(self, id: str) -> HeartBeatModel:
         with self.session_factory() as session:
-            heartbeat = session.query(HeartBeatModel).filter(HeartBeatModel.id == id).one_or_none()
+            heartbeat = (
+                session.query(HeartBeatModel)
+                .filter(HeartBeatModel.id == id)
+                .one_or_none()
+            )
             if not heartbeat:
                 raise HeartBeatRepository.NotFoundException(id=id)
 

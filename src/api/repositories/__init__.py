@@ -15,7 +15,9 @@ class Repository:
             self._kwargs = kwargs
 
         def __str__(self) -> str:
-            kwargs_str = ", ".join(f"{key} {value}" for key, value in self._kwargs.items())
+            kwargs_str = ", ".join(
+                f"{key} {value}" for key, value in self._kwargs.items()
+            )
 
             return f"There is no {self._model_name} with {kwargs_str}"
 
@@ -27,6 +29,8 @@ class Repository:
             self._kwargs = kwargs
 
         def __str__(self) -> str:
-            kwargs_str = ", ".join(f"{key} {value}" for key, value in self._kwargs.items())
+            kwargs_str = ", ".join(
+                f"{key} {value}" for key, value in self._kwargs.items()
+            )
 
             return f"{self._model_name} with {kwargs_str} already exists"

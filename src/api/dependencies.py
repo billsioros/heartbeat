@@ -12,7 +12,9 @@ async def get_settings(request: Request):
     return request.app.state.settings
 
 
-async def get_database(request: Request, settings: Settings = Depends(get_settings)) -> Database:
+async def get_database(
+    request: Request, settings: Settings = Depends(get_settings)
+) -> Database:
     return Database(str(settings.database.uri))
 
 
