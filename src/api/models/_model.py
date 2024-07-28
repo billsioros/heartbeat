@@ -23,7 +23,9 @@ class PkModel(Model):
         default=lambda: str(uuid.uuid4()),
         primary_key=True,
     )
-    created_at: Mapped[datetime.datetime] = Column(DateTime, default=func.current_timestamp())
+    created_at: Mapped[datetime.datetime] = Column(
+        DateTime, default=func.current_timestamp()
+    )
     updated_at: Mapped[datetime.datetime] = Column(
         DateTime,
         default=func.current_timestamp(),
