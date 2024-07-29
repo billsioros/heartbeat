@@ -14,7 +14,6 @@ import { useHeartBeat } from './HeartBeatQuery';
 import Loading from '../../components/Loading';
 import {
     ReverseChestPain,
-    ReverseRestingElectrocardiogram,
     ReverseSex,
     ReverseStSlope,
     getEnumValue,
@@ -34,7 +33,7 @@ export default function HeartBeatDetail() {
     if (isError) {
         register({
             severity: 'error',
-            message: `Failed to retrieve HeartBeats (${error.message})`,
+            message: `Failed to retrieve HeartBeat (${error.message})`,
         });
 
         return null;
@@ -43,9 +42,19 @@ export default function HeartBeatDetail() {
     console.log(heartbeat);
 
     return (
-        <Box sx={{ maxWidth: 800, margin: 'auto' }}>
+        <Box
+            sx={{
+                maxWidth: 1000,
+                width: '70%',
+                margin: 'auto',
+            }}
+        >
             <Card>
                 <CardHeader
+                    sx={{
+                        color: heartbeat.heart_disease ? 'red' : 'green',
+                        fontWeight: 'bold',
+                    }}
                     title={`${heartbeat.heart_disease ? 'Heart Disease' : 'No Heart Disease'}`}
                     subheader={heartbeat.id}
                 />
@@ -67,6 +76,22 @@ export default function HeartBeatDetail() {
                                 Sex: {getEnumValue(ReverseSex, heartbeat.sex)}
                             </Typography>
                         </Grid>
+                        <Grid item xs={12} sm={6} key="max_heart_rate">
+                            <Typography
+                                variant="subtitle1"
+                                color="textSecondary"
+                            >
+                                Max Heart Rate: {heartbeat.max_heart_rate}
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={12} sm={6} key="old_peak">
+                            <Typography
+                                variant="subtitle1"
+                                color="textSecondary"
+                            >
+                                Old Peak: {heartbeat.old_peak}
+                            </Typography>
+                        </Grid>
                         <Grid item xs={12} sm={6} key="chest_pain_type">
                             <Typography
                                 variant="subtitle1"
@@ -79,23 +104,6 @@ export default function HeartBeatDetail() {
                                 )}
                             </Typography>
                         </Grid>
-                        <Grid item xs={12} sm={6} key="resting_blood_pressure">
-                            <Typography
-                                variant="subtitle1"
-                                color="textSecondary"
-                            >
-                                Resting Blood Pressure:{' '}
-                                {heartbeat.resting_blood_pressure}
-                            </Typography>
-                        </Grid>
-                        <Grid item xs={12} sm={6} key="cholesterol">
-                            <Typography
-                                variant="subtitle1"
-                                color="textSecondary"
-                            >
-                                Cholesterol: {heartbeat.cholesterol}
-                            </Typography>
-                        </Grid>
                         <Grid item xs={12} sm={6} key="fasting_blood_sugar">
                             <Typography
                                 variant="subtitle1"
@@ -105,31 +113,6 @@ export default function HeartBeatDetail() {
                                 {heartbeat.fasting_blood_sugar ? 'Yes' : 'No'}
                             </Typography>
                         </Grid>
-                        <Grid
-                            item
-                            xs={12}
-                            sm={6}
-                            key="resting_electrocardiogram"
-                        >
-                            <Typography
-                                variant="subtitle1"
-                                color="textSecondary"
-                            >
-                                Resting ECG:{' '}
-                                {getEnumValue(
-                                    ReverseRestingElectrocardiogram,
-                                    heartbeat.resting_electrocardiogram,
-                                )}
-                            </Typography>
-                        </Grid>
-                        <Grid item xs={12} sm={6} key="max_heart_rate">
-                            <Typography
-                                variant="subtitle1"
-                                color="textSecondary"
-                            >
-                                Max Heart Rate: {heartbeat.max_heart_rate}
-                            </Typography>
-                        </Grid>
                         <Grid item xs={12} sm={6} key="exercise_angina">
                             <Typography
                                 variant="subtitle1"
@@ -137,14 +120,6 @@ export default function HeartBeatDetail() {
                             >
                                 Exercise Angina:{' '}
                                 {heartbeat.exercise_angina ? 'Yes' : 'No'}
-                            </Typography>
-                        </Grid>
-                        <Grid item xs={12} sm={6} key="old_peak">
-                            <Typography
-                                variant="subtitle1"
-                                color="textSecondary"
-                            >
-                                Old Peak: {heartbeat.old_peak}
                             </Typography>
                         </Grid>
                         <Grid item xs={12} sm={6} key="st_slope">

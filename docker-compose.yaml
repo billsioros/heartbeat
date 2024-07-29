@@ -33,6 +33,8 @@ services:
       interval: 5s
       timeout: 10s
       retries: 10
+    volumes:
+      - ${PWD}/model.joblib:/home/app/app/model.joblib
   database:
     env_file: .env
     container_name: database

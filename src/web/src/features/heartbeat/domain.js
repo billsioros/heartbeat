@@ -18,12 +18,6 @@ export const ChestPain = {
     Asymptomatic: 4,
 };
 
-export const RestingElectrocardiogram = {
-    Normal: 1,
-    STT: 2, // ST-T wave abnormality
-    LVH: 3, // Left ventricular hypertrophy
-};
-
 export const StSlope = {
     Up: 1,
     Flat: 2,
@@ -33,9 +27,6 @@ export const StSlope = {
 // Creating reverse dictionaries
 export const ReverseSex = createReverseDictionary(Sex);
 export const ReverseChestPain = createReverseDictionary(ChestPain);
-export const ReverseRestingElectrocardiogram = createReverseDictionary(
-    RestingElectrocardiogram,
-);
 export const ReverseStSlope = createReverseDictionary(StSlope);
 
 // Function to get enum values from dictionaries

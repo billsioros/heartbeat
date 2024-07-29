@@ -1,3 +1,4 @@
+from pathlib import Path
 from pydantic import BaseModel, PostgresDsn
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
@@ -15,3 +16,4 @@ class Settings(BaseSettings):
     )
 
     database: DatabaseSettings = DatabaseSettings()
+    checkpoint_path: Path
