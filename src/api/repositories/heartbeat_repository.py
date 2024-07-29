@@ -3,6 +3,8 @@ from typing import Any
 
 from sqlalchemy import exc
 
+from sqlalchemy import desc
+
 from api.models.heartbeat import HeartBeatModel
 from api.repositories import Repository
 from api.resources.database import Database
@@ -22,7 +24,11 @@ class HeartBeatRepository(Repository):
 
     def get_all(self) -> Iterator[HeartBeatModel]:
         with self.session_factory() as session:
-            return session.query(HeartBeatModel).all()
+            return (
+                session.query(HeartBeatModel)
+                .order_by(desc(HeartBeatModel.created_at))
+                .all()
+            )
 
     def get_by_id(self, id: str) -> HeartBeatModel:
         with self.session_factory() as session:

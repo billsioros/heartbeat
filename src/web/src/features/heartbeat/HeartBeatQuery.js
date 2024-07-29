@@ -1,13 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import { useSnackbar } from '../../providers/SnackbarProvider';
-import {
-    ChestPain,
-    RestingElectrocardiogram,
-    Sex,
-    StSlope,
-    getEnumValue,
-} from './domain';
+import { ChestPain, Sex, StSlope, getEnumValue } from './domain';
 
 export const heartbeatQueryKeys = {
     all: ['heartbeats'],
@@ -99,9 +93,17 @@ export function useCreateHeartBeat() {
             });
         },
         onSuccess: (data, heartbeat, context) => {
+            let severity = 'success';
+            let message = 'All good!';
+
+            if (data.heart_disease === true) {
+                severity = 'error';
+                message = 'Heart disease detected!';
+            }
+
             register({
-                severity: 'success',
-                message: `Created HeartBeat ${data.id}`,
+                severity: severity,
+                message: message,
             });
         },
         onError: (error, heartbeat, context) => {
@@ -122,13 +124,7 @@ export function useCreateHeartBeat() {
             age: values.age,
             sex: getEnumValue(Sex, values.sex),
             chest_pain_type: getEnumValue(ChestPain, values.chestPain),
-            resting_blood_pressure: values.restingBloodPressure,
-            cholesterol: values.cholesterol,
             fasting_blood_sugar: values.fastingBloodSugar !== 'Otherwise',
-            resting_electrocardiogram: getEnumValue(
-                RestingElectrocardiogram,
-                values.restingElectrocardiogram,
-            ),
             max_heart_rate: values.maxHeartRate,
             exercise_angina: values.exerciseAngina === 'Yes',
             old_peak: values.oldPeak,

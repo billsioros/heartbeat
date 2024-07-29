@@ -21,7 +21,6 @@ import { useCreateHeartBeat } from './HeartBeatQuery';
 import {
     Sex as SexType,
     ChestPain as ChestPainType,
-    RestingElectrocardiogram as RestingElectrocardiogramType,
     StSlope as StSlopeType,
 } from './domain';
 
@@ -80,7 +79,8 @@ function Select({
                 value={value}
                 onChange={onChange}
                 onBlur={() => setFieldTouched(id)}
-                label={label}>
+                label={label}
+            >
                 {choices.map(newChoice => (
                     <MenuItem key={newChoice} value={newChoice}>
                         {newChoice}
@@ -94,18 +94,14 @@ function Select({
 
 export default function HeartBeatCreateForm({ open }) {
     const theme = useTheme();
-    const navigate = useNavigate();
 
-    const { createHeartBeat, error } = useCreateHeartBeat();
+    const { createHeartBeat } = useCreateHeartBeat();
 
     const initialValues = {
         age: '',
         sex: '',
         chestPain: '',
-        restingBloodPressure: '',
-        cholesterol: '',
         fastingBloodSugar: '',
-        restingElectrocardiogram: '',
         maxHeartRate: '',
         exerciseAngina: '',
         oldPeak: '',
@@ -121,10 +117,6 @@ export default function HeartBeatCreateForm({ open }) {
         .mixed()
         .label('Fasting Blood Sugar')
         .oneOf(['Greater than 120 mg/dl', 'Otherwise']);
-    const RestingElectrocardiogram = yup
-        .mixed()
-        .label('Resting Electrocardiogram')
-        .oneOf(Object.keys(RestingElectrocardiogramType));
     const ExerciseAngina = yup
         .mixed()
         .label('Exercise Angina')
@@ -138,24 +130,9 @@ export default function HeartBeatCreateForm({ open }) {
         age: yup.number().label('Age').integer().min(0).max(130).required(),
         sex: Sex.required(),
         chestPain: ChestPain.required(),
-        restingBloodPressure: yup
-            .number()
-            .label('Resting Blood Pressure')
-            .integer()
-            .min(0)
-            .max(250)
-            .required(),
-        cholesterol: yup
-            .number()
-            .label('Cholesterol')
-            .integer()
-            .min(0)
-            .max(700)
-            .required(),
         fastingBloodSugar: FastingBloodSugar.label(
             'Fasting Blood Sugar',
         ).required(),
-        restingElectrocardiogram: RestingElectrocardiogram.required(),
         maxHeartRate: yup
             .number()
             .label('Max Heart Rate')
@@ -194,12 +171,14 @@ export default function HeartBeatCreateForm({ open }) {
                 onSubmit={e => {
                     e.preventDefault();
                     handleSubmit();
-                }}>
+                }}
+            >
                 <Grid
                     sx={{ minHeight: '30vh' }}
                     container
                     columns={20}
-                    spacing={theme.spacing(1)}>
+                    spacing={theme.spacing(1)}
+                >
                     <Grid item xs={10}>
                         <TextField
                             id="age"
@@ -226,38 +205,7 @@ export default function HeartBeatCreateForm({ open }) {
                             helperText={getHelperText('sex')}
                         />
                     </Grid>
-                    <Grid item xs={5}>
-                        <TextField
-                            id="restingBloodPressure"
-                            label="Resting Blood Pressure"
-                            onBlur={handleBlur}
-                            onChange={handleChange}
-                            value={values.restingBloodPressure}
-                            placeholder="120"
-                            name="restingBloodPressure"
-                            error={
-                                !!touched.restingBloodPressure &&
-                                !!errors.restingBloodPressure
-                            }
-                            helperText={getHelperText('restingBloodPressure')}
-                        />
-                    </Grid>
-                    <Grid item xs={5}>
-                        <TextField
-                            id="cholesterol"
-                            label="Cholesterol"
-                            onBlur={handleBlur}
-                            onChange={handleChange}
-                            value={values.cholesterol}
-                            placeholder="200"
-                            name="cholesterol"
-                            error={
-                                !!touched.cholesterol && !!errors.cholesterol
-                            }
-                            helperText={getHelperText('cholesterol')}
-                        />
-                    </Grid>
-                    <Grid item xs={5}>
+                    <Grid item xs={10}>
                         <TextField
                             id="maxHeartRate"
                             label="Max Heart Rate"
@@ -265,14 +213,14 @@ export default function HeartBeatCreateForm({ open }) {
                             onChange={handleChange}
                             value={values.maxHeartRate}
                             placeholder="60"
-                            name="cholesterol"
+                            name="maxHeartRate"
                             error={
                                 !!touched.maxHeartRate && !!errors.maxHeartRate
                             }
                             helperText={getHelperText('maxHeartRate')}
                         />
                     </Grid>
-                    <Grid item xs={5}>
+                    <Grid item xs={10}>
                         <TextField
                             id="oldPeak"
                             label="Old Peak"
@@ -285,7 +233,7 @@ export default function HeartBeatCreateForm({ open }) {
                             helperText={getHelperText('oldPeak')}
                         />
                     </Grid>
-                    <Grid item xs={4}>
+                    <Grid item xs={5}>
                         <Select
                             setFieldValue={setFieldValue}
                             id={'chestPain'}
@@ -303,7 +251,7 @@ export default function HeartBeatCreateForm({ open }) {
                             helperText={getHelperText('chestPain')}
                         />
                     </Grid>
-                    <Grid item xs={4}>
+                    <Grid item xs={5}>
                         <Select
                             setFieldValue={setFieldValue}
                             id={'fastingBloodSugar'}
@@ -319,25 +267,7 @@ export default function HeartBeatCreateForm({ open }) {
                             helperText={getHelperText('fastingBloodSugar')}
                         />
                     </Grid>
-                    <Grid item xs={4}>
-                        <Select
-                            setFieldValue={setFieldValue}
-                            id={'restingElectrocardiogram'}
-                            label="Resting Electrocardiogram"
-                            choices={['Normal', 'STT', 'LVH']}
-                            error={
-                                !!touched.restingElectrocardiogram &&
-                                !!errors.restingElectrocardiogram
-                            }
-                            onChange={handleChange}
-                            setFieldTouched={setFieldTouched}
-                            value={values.restingElectrocardiogram}
-                            helperText={getHelperText(
-                                'restingElectrocardiogram',
-                            )}
-                        />
-                    </Grid>
-                    <Grid item xs={4}>
+                    <Grid item xs={5}>
                         <Select
                             setFieldValue={setFieldValue}
                             id={'exerciseAngina'}
@@ -353,7 +283,7 @@ export default function HeartBeatCreateForm({ open }) {
                             helperText={getHelperText('exerciseAngina')}
                         />
                     </Grid>
-                    <Grid item xs={4}>
+                    <Grid item xs={5}>
                         <Select
                             setFieldValue={setFieldValue}
                             id={'stSlope'}
@@ -371,13 +301,15 @@ export default function HeartBeatCreateForm({ open }) {
                     width="100%"
                     display="flex"
                     justifyContent="flex-end"
-                    mt={theme.spacing(4)}>
+                    mt={theme.spacing(4)}
+                >
                     <Box width="25%" display="flex" justifyContent="flex-end">
                         <Button
                             color="primary"
                             variant="contained"
                             endIcon={<MonitorHeartIcon />}
-                            type="submit">
+                            type="submit"
+                        >
                             Diagnose
                         </Button>
                     </Box>
@@ -397,18 +329,21 @@ export default function HeartBeatCreateForm({ open }) {
             style={{
                 display: 'flex',
                 flexDirection: 'column',
-                width: '80%',
+                maxWidth: 1000,
+                width: '70%',
                 margin: 'auto',
                 justifyContent: 'center',
                 padding: theme.spacing(4),
-            }}>
+            }}
+        >
             <Typography sx={{ marginBottom: theme.spacing(4) }} variant="h5">
                 Fill in the form to get your diagnosis
             </Typography>
             <Formik
                 onSubmit={handleFormSubmit}
                 initialValues={initialValues}
-                validationSchema={HeartBeatSchema}>
+                validationSchema={HeartBeatSchema}
+            >
                 {renderForm}
             </Formik>
         </Paper>

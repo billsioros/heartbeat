@@ -88,6 +88,12 @@ repos:
       - id: poetry-check
       - id: poetry-lock
         args: [--check]
+  - repo: https://github.com/nbQA-dev/nbQA
+    rev: 1.8.5
+    hooks:
+      - id: nbqa-check-ast
+      - id: nbqa-ruff
+      - id: nbqa-mypy
   - repo: meta
     hooks:
       - id: check-hooks-apply

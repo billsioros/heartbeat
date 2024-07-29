@@ -41,14 +41,48 @@ export default function HeartBeatList({ pageSize = 10 }) {
 
     const pageCount = Math.ceil(heartbeats.length / pageSize);
 
+    console.log(heartbeats.length);
+
+    if (heartbeats.length === 0) {
+        return (
+            <Box
+                sx={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    background: theme.palette.background.default,
+                    maxWidth: 1000,
+                    width: '70%',
+                    maxHeight: 900,
+                    height: '90%',
+                    marginTop: theme.spacing(2),
+                    padding: theme.spacing(2),
+                }}
+            >
+                <Typography
+                    sx={{
+                        color: '#2dbbc7',
+                        margin: 'auto',
+                        textAlign: 'center',
+                        fontWeight: 'bold',
+                    }}
+                    variant="h5"
+                >
+                    No HeartBeats yet!
+                </Typography>
+            </Box>
+        );
+    }
+
     return (
         <Box
             sx={{
                 background: theme.palette.background.default,
-                minHeight: '10vh',
-                width: '100%',
-                height: '100%',
-                padding: theme.spacing(3),
+                maxWidth: 1000,
+                width: '70%',
+                maxHeight: 900,
+                height: '90%',
+                marginTop: theme.spacing(2),
+                padding: theme.spacing(2),
             }}
         >
             <List>
@@ -64,20 +98,16 @@ export default function HeartBeatList({ pageSize = 10 }) {
                         >
                             <ListItemText
                                 primary={
-                                    <Link
-                                        style={{
-                                            textDecoration: 'none',
-                                            fontWeight: 'bold',
-                                        }}
-                                        to={`/heartbeats/${heartbeat.id}`}
-                                        color="inherit"
-                                    >
+                                    <Link to={`/heartbeats/${heartbeat.id}`}>
                                         {heartbeat.id}
                                     </Link>
                                 }
                                 secondary={
                                     <Typography
-                                        variant="body2"
+                                        variant="body1"
+                                        sx={{
+                                            fontWeight: 'bold',
+                                        }}
                                         color={
                                             heartbeat.heart_disease
                                                 ? 'red'

@@ -1,6 +1,6 @@
 from fastapi import Depends
 from fastapi.requests import Request
-
+import joblib
 from api.bot import Bot
 from api.repositories.heartbeat_repository import HeartBeatRepository
 from api.resources.database import Database
@@ -25,8 +25,10 @@ async def get_heartbeat_repository(
     return HeartBeatRepository(database)
 
 
-async def get_bot(request: Request):
-    return Bot()
+async def get_bot(request: Request, settings: Settings = Depends(get_settings)):
+    model = joblib.load(settings.checkpoint_path)
+
+    return Bot(model)
 
 
 async def get_heartbeat_service(

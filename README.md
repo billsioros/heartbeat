@@ -45,6 +45,14 @@
   </a>
 </p>
 
+Cardiovascular diseases (CVDs) are the number 1 cause of death globally, taking an estimated 17.9 million lives each year, which accounts for 31% of all deaths worldwide. Four out of 5CVD deaths are due to heart attacks and strokes, and one-third of these deaths occur prematurely in people under 70 years of age. Heart failure is a common event caused by CVDs and this dataset contains 11 features that can be used to predict a possible heart disease.
+
+People with cardiovascular disease or who are at high cardiovascular risk (due to the presence of one or more risk factors such as hypertension, diabetes, hyperlipidaemia or already established disease) need early detection and management wherein a machine learning model can be of great help.
+
+> Source: [https://www.kaggle.com/datasets/fedesoriano/heart-failure-prediction](https://www.kaggle.com/datasets/fedesoriano/heart-failure-prediction)
+
+In this project, we create a complete solution featuring a [`FastAPI`](https://fastapi.tiangolo.com/) backend and a [`React`](https://react.dev/) frontend. We perform Exploratory Data Analysis (EDA) and develop a machine learning model using [`scikit-learn`](https://scikit-learn.org).
+
 ## :rocket: Running the project
 
 > [!IMPORTANT]
@@ -65,6 +73,7 @@
     POSTGRES_PASSWORD=')M8z*yss$cRxw7(&'
 
     BACKEND_DATABASE__URI = 'postgresql://guest:)M8z*yss$cRxw7(&@database:5432/heartbeat'
+    BACKEND_CHECKPOINT_PATH = './model.joblib' # The model checkpoint should be in your project directory. This is necessary for mounting the volume in Docker. Leave it as is.
     ```
 
 3. **Build and start the services** using Docker Compose.
@@ -73,7 +82,7 @@
     docker-compose up --build
     ```
 
-> The frontend and the backend should be now available at [`http://localhost:80`](http://localhost:80) and [`http://localhost:8000`](http://localhost:8000), respectively.
+> The frontend and the backend should be now available at [`http://localhost:80`](http://localhost:80) and [`http://localhost:8000`](http://localhost:8000), respectively. Make sure you also run `poe manage database create` to create the actual database (assuming you have correctly exported `BACKEND_DATABASE__URI`).
 
 ### Troubleshooting
 
@@ -97,20 +106,18 @@
 
 ### Running the services outside of Docker
 
-> [!IMPORTANT]
-> Ensure PostgreSQL is set up before running the project by using `docker compose up database --d`. Afterward, run `poe manage database create` to create the actual database. To tear down PostgreSQL, use `docker compose down database -v`.
-
-Running the backend:
+We use the [Poetry](https://python-poetry.org/) Python package manager. [Having installed Poetry](https://python-poetry.org/docs/#installing-with-the-official-installer) you may now create a brand new [virtual environment](https://docs.python.org/3/tutorial/venv.html) and install the project's dependencies.
 
 ```shell
 export BACKEND_DATABASE__URI='postgresql://guest:)M8z*yss$cRxw7(&@localhost:5432/heartbeat'
+export BACKEND_CHECKPOINT_PATH='./model.joblib'
 poetry env use 3.11
 poetry install
 python src/api/app.py
 ```
 
-> [!NOTE]
-> We use the [Poetry](https://python-poetry.org/) Python package manager. [Having installed Poetry](https://python-poetry.org/docs/#installing-with-the-official-installer) you may now create a brand new [virtual environment](https://docs.python.org/3/tutorial/venv.html) and install the project's dependencies.
+> [!IMPORTANT]
+> Set up PostgreSQL before starting the project with `docker compose up database --d`. Afterward, run `poe manage database create` to create the actual database. To tear down PostgreSQL, use `docker compose down database -v`.
 
 Running the frontend:
 
@@ -122,11 +129,9 @@ npm run dev -- --host --port 80
 ```
 
 > [!NOTE]
-> [nvm](https://github.com/nvm-sh/nvm) enables you to quickly install and switch between different versions of Node.js via the command line. Ensure you install nvm, then install Node.js 20 by running `nvm install 20`.
+> Ensure you have Node.js 20 installed. We use [nvm](https://github.com/nvm-sh/nvm) for this because it makes it easy to install and switch between Node.js versions. To install Node.js 20, run `nvm install 20`.
 
 ## :computer: Deploying to production
-
-## Deploying to Production
 
 Deploying to production involves several crucial steps, including setting up a server, configuring DNS, and managing SSL certificates. [`Traefik`](https://github.com/traefik/traefik) simplifies many of these tasks, acting as a powerful reverse proxy and load balancer. For a comprehensive guide on deploying your FastAPI application with Traefik, read the full article [here](https://github.com/tiangolo/blog-posts/blob/master/deploying-fastapi-apps-with-https-powered-by-traefik/README.md).
 
@@ -160,4 +165,4 @@ The project's version number and [Changelog](https://github.com/billsioros/heart
 
 ## :label: Credits
 
-This project was generated with [`billsioros/heartbeat`](https://github.com/billsioros/heartbeat) cookiecutter template.
+This project was generated with [`billsioros/cookiecutter-pypackage`](https://github.com/billsioros/cookiecutter-pypackage) cookiecutter template.

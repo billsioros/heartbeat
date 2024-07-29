@@ -1,7 +1,6 @@
 import uvicorn
 from fastapi import APIRouter, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-
 from api.controllers.heartbeat_controller import api as heartbeat_controller
 from api.controllers.monitor_controller import api as monitor_controller
 from api.settings import Settings
@@ -49,14 +48,9 @@ def register_middlewares(app: FastAPI) -> FastAPI:
     return app
 
 
-def register_events(app: FastAPI) -> FastAPI:
-    return app
-
-
 def create_app() -> FastAPI:
     app = initialize_api()
     app = register_configuration(app)
-    app = register_events(app)
     app = register_controllers(app)
     app = register_middlewares(app)
 
