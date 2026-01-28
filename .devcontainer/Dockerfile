@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/devcontainers/python:3.11-bullseye
+FROM mcr.microsoft.com/devcontainers/python:3.13-bullseye
 
 # Set up zsh
 RUN apt-get update && \
